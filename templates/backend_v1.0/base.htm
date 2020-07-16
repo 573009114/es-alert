@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% block head %}
+  <head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="{% static 'assets/img/logo-fav.png' %}">
+    {% block title %}<title>Eagle日志管理系统</title>{% endblock %}
+    {% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/lib/perfect-scrollbar/css/perfect-scrollbar.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/lib/material-design-icons/css/material-design-iconic-font.min.css' %}"/>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" type="text/css"/>
+    {% endblock %}
+  </head>
+  {% endblock %}
+  <body>
+    <div class="be-wrapper">
+      {% block nav %}
+      <nav class="navbar navbar-default navbar-fixed-top be-top-header">
+        <div class="container-fluid">
+          <div class="navbar-header"><a href="/" class="navbar-brand"></a></div>
+          <div class="be-right-navbar">
+            <ul class="nav navbar-nav navbar-right be-user-nav">
+              <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><img src="{% static 'assets/img/avatar.png' %}" alt="Avatar"><span class="user-name">管理员</span></a>
+                <ul role="menu" class="dropdown-menu">
+                  <li>
+                    <div class="user-info">
+                      <div class="user-name">{% block user %}{{request.user}}{% endblock %}</div>
+                      <div class="user-position online">{% block online %}online{% endblock %}</div>
+                    </div>
+                  </li>
+                  <li><a href="/account/logout"><span class="icon mdi mdi-power"></span> 登出</a></li>
+                </ul>                
+              </li>
+            </ul>
+            {% block title-name %}<div class="page-title"><span>主看板</span></div>{% endblock %}
+             <ul class="nav navbar-nav navbar-right be-icons-nav"> 
+              <!-- 缩略 -->
+              <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span class="icon mdi mdi-apps"></span></a>
+                <ul class="dropdown-menu be-connections">
+                  <li>
+                    <div class="list">
+                      <div class="content">
+                        <div class="row">
+                          <div class="col-xs-4"><a href="/" class="connection-item"><img src="{% static 'assets/img/home.png' %}" alt="主页"><span>主页</span></a></div>
+                          <div class="col-xs-4"><a href="/account/modify" class="connection-item"><img src="{% static 'assets/img/repasswd.png' %}" alt="修改密码"><span>修改密码</span></a></div>
+                          <div class="col-xs-4"><a href="/rules/index" class="connection-item"><img src="{% static 'assets/img/alert.png' %}" alt="监控告警"><span>监控告警</span></a></div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    {% endblock %}
+
+      <div class="be-left-sidebar">
+       <div class="left-sidebar-wrapper">
+        <div class="left-sidebar-spacer">
+          <div class="left-sidebar-scroll">
+            <div class="left-sidebar-content">
+              {% block menu %}
+              <ul class="sidebar-elements">
+                <li class="divider">菜单</li>
+                <li class="active"><a href="/"><i class="icon mdi mdi-home"></i><span>仪表盘</span></a></li>
+
+                <li class="parent"><a href="#"><i class="icon mdi mdi-accounts-alt"></i><span>联系人管理</span></a>
+                  <ul class="sub-menu">
+                    <li><a href="/contacts/">联系人</a></li> 
+                  </ul>
+                </li>
+
+                <li class="parent"><a href="#"><i class="icon mdi mdi-chart-donut"></i><span>监控报警</span></a>
+                  <ul class="sub-menu">
+                    <li><a href="/group/">报警组</a></li>
+                    <li><a href="/rules/index">报警规则</a></li>                
+                  </ul>
+                </li>
+                <!-- <li class="parent"><a href="#"><i class="icon mdi mdi-dot-circle"></i><span>数据源</span></a>
+                  <ul class="sub-menu">
+                    <li><a href="/datasource/">数据源设置</a>
+                    </li> 
+                
+                  </ul>
+                </li> -->
+                <!-- <li class="parent"><a href="#"><i class="icon mdi mdi-face"></i><span>访问控制</span></a>
+                  <ul class="sub-menu">
+                    <li><a href="/access/">用户</a>
+                    </li> 
+                    <li><a href="/#/">用户组</a>
+                    </li>
+                    <li><a href="/#/">授权管理</a>
+                    </li>  
+                  </ul>
+                </li> -->
+                <li class="parent"><a href="#"><i class="icon mdi mdi-settings"></i><span>系统设置</span></a>
+                  <ul class="sub-menu">
+                    <!-- <li><a href="/system/">基本信息</a>
+                    </li>  -->
+                    <li><a href="/account/modify">密码修改</a>
+                    </li>  
+                  </ul>
+                </li>
+              </ul>
+              {% endblock %}  
+            </div>
+          </div>
+        </div>
+        <div class="progress-widget">
+          <div class="progress-data"><span class="progress-value">60%</span><span class="name">存储空间</span></div>
+          <div class="progress">
+            <div style="width: 60%;" class="progress-bar progress-bar-primary"></div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="be-content">
+        {%block crumbs %}
+        <div class="page-head">
+          <ol class="breadcrumb page-head-nav">
+            <li><a href="#">仪表盘</a></li>
+            <li><a href="#">二级菜单</a></li>
+            <li class="active">三级导航</li>
+          </ol>
+        </div>
+        {% endblock %}
+        {%block content %}
+        <div class="main-content container-fluid">
+          <div class="col-sm-12">
+            <div class="panel panel-default panel-table">
+                111
+            </div>
+          </div>
+        </div>
+        {% endblock %}
+      </div> 
+      
+    {% block base_js %}
+    {% load static %}
+    <script src="{% static 'assets/lib/jquery/jquery.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/js/main.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/lib/bootstrap/dist/js/bootstrap.min.js' %}" type="text/javascript"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+      	//initialize the javascript
+      	App.init();
+      });
+      
+    </script>
+    {% endblock %}
+  </body>
+</html>

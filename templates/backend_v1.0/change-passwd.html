@@ -1,0 +1,52 @@
+{%extends "backend_v1.0/base.htm" %}
+{% block title %}密码修改-Eagle日志管理系统{% endblock %}
+{% block title-name %}{% endblock %}
+
+{%block crumbs %}
+<ol class="breadcrumb page-head-nav">
+  <li><a href="/">仪表盘</a></li>
+  <li>系统设置</li>
+  <li class="active">密码修改</li>
+</ol>
+{% endblock %}
+
+
+{%block content %}
+{% load static %}
+<div class="col-sm-12">
+  <div class="panel panel-default panel-border-color panel-border-color-primary">
+    <div class="panel-heading panel-heading-divider">修改密码</div>
+    <div class="panel-body">
+      <form action="" data-parsley-validate="" novalidate="" method="POST" >
+        {% csrf_token %}
+       
+        <div role="alert" class="alert alert-primary alert-dismissible">
+          <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="mdi mdi-close"></span></button><span class="icon mdi mdi-check"></span><strong>提示信息</strong> {{msg}}
+        </div>
+
+        <div class="form-group">
+          <label>User Name</label>
+          <input type="text" name="username" placeholder="用户名" class="form-control parsley-error" >
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input  type="password" name="oldpassword" placeholder="旧密码" class="form-control parsley-error">
+        </div>
+        <div class="form-group">
+          <label>New Password</label>
+          <input type="password" name="newpassword" placeholder="新密码" class="form-control parsley-error">
+        </div>
+        <div class="form-group">
+          <label>Repeat Password</label>
+          <input name="repeatpassword" type="password" placeholder="重复新密码" class="form-control">
+        </div>  
+        <p class="text-right">
+          <button type="submit" class="btn btn-space btn-primary btn-lg">提交</button>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
